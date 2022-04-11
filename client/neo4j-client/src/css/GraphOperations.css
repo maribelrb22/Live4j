@@ -1,0 +1,12 @@
+.p-card-body {
+  height: 100vh;
+  overflow-y: auto !important;
+}
+
+.p-card-title {
+  text-align: center !important;
+}
+
+.p-card {
+  border-radius: 0px !important;
+}

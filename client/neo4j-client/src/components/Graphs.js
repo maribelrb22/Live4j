@@ -51,6 +51,8 @@ const Graphs = () => {
             }
         },
     };
+
+    //TODO: Differentiate between movies and genres
     return (
         <div>
             <Graph
@@ -95,16 +97,10 @@ const Graphs = () => {
                     <Button label="Eliminar" className="ml-3 p-button-danger" icon="pi pi-minus-circle" onClick={() => console.log("nodo eliminado")} />
                 </div>
             </Dialog>
-            <Dialog header="¿Qué quieres hacer?" className="w-4" visible={edgeSelected} onHide={() => setEdgeSelected(false)}>
+            <Dialog header="¿Quieres eliminar la relación?" className="w-4" visible={edgeSelected} onHide={() => setEdgeSelected(false)}>
                 <div className="text-center">
-                    <div className="p-inputgroup mb-2">
-                        <span className="p-inputgroup-addon">
-                            <i className="pi pi-tag"></i>
-                        </span>
-                        <InputText className='w-full' placeholder='Género' />
-                    </div>
-                    <Button label="Editar" icon="pi pi-pencil" onClick={() => console.log("arista editada")} />
-                    <Button label="Eliminar" className="ml-3 p-button-danger" icon="pi pi-minus-circle" onClick={() => console.log("arista eliminada")} />
+                    <Button label="Eliminar" className="p-button-danger" icon="pi pi-minus-circle" onClick={() => console.log("arista eliminada")} />
+                    <Button label="Cancelar" className="ml-3" icon="pi pi-times" onClick={() => console.log("cancelar eliminado")} />
                 </div>
             </Dialog>
         </div>

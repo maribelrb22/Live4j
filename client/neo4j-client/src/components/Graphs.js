@@ -2,6 +2,8 @@ import Graph from "react-graph-vis";
 import React, { useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { MultiSelect } from 'primereact/multiselect';
 import "../css/Graphs.css";
 
 const Graphs = () => {
@@ -57,16 +59,52 @@ const Graphs = () => {
                 events={events}
             />
 
-            <Dialog header={"Editar nodo " + idSelectedNode} className="w-4" visible={nodeSelected} onHide={() => setNodeSelected(false)}>
+            <Dialog header="¿Qué quieres hacer?" className="w-4" visible={nodeSelected} onHide={() => setNodeSelected(false)}>
                 <div className="text-center">
-                    <Button label="Eliminar" className="mr-3 p-button-danger" icon="pi pi-minus-circle" onClick={() => console.log("nodo eliminado")} />
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-id-card"></i>
+                        </span>
+                        <InputText placeholder='Título de la película' />
+                    </div>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-globe"></i>
+                        </span>
+                        <InputText className='w-full' placeholder='Idioma original' />
+                    </div>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-calendar"></i>
+                        </span>
+                        <InputText className='w-full' placeholder='Fecha de estreno' />
+                    </div>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-star"></i>
+                        </span>
+                        <InputText className='w-full' placeholder='Puntuación' />
+                    </div>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-tag"></i>
+                        </span>
+                        <MultiSelect placeholder="Selecciona géneros" />
+                    </div>
                     <Button label="Editar" icon="pi pi-pencil" onClick={() => console.log("nodo editado")} />
+                    <Button label="Eliminar" className="ml-3 p-button-danger" icon="pi pi-minus-circle" onClick={() => console.log("nodo eliminado")} />
                 </div>
             </Dialog>
-            <Dialog header={"Editar arista " + idSelectedEdge} className="w-4" visible={edgeSelected} onHide={() => setEdgeSelected(false)}>
-                <div className="mt-3 text-center">
-                    <Button label="Eliminar" className="mr-3 p-button-danger" icon="pi pi-minus-circle" onClick={() => console.log("arista eliminada")} />
+            <Dialog header="¿Qué quieres hacer?" className="w-4" visible={edgeSelected} onHide={() => setEdgeSelected(false)}>
+                <div className="text-center">
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-tag"></i>
+                        </span>
+                        <InputText className='w-full' placeholder='Género' />
+                    </div>
                     <Button label="Editar" icon="pi pi-pencil" onClick={() => console.log("arista editada")} />
+                    <Button label="Eliminar" className="ml-3 p-button-danger" icon="pi pi-minus-circle" onClick={() => console.log("arista eliminada")} />
                 </div>
             </Dialog>
         </div>

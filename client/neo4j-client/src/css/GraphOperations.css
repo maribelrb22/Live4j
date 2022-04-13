@@ -10,3 +10,7 @@
 .p-card {
   border-radius: 0px !important;
 }
+
+.p-inputtext::placeholder {
+  opacity: 1 !important;
+}

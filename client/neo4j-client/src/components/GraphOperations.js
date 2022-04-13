@@ -4,32 +4,79 @@ import { Accordion, AccordionTab } from 'primereact/accordion';
 import React, { useState } from 'react';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+import { MultiSelect } from 'primereact/multiselect';
 
 const GraphOperations = () => {
     const [inputQuery, setInputQuery] = useState('');
+    const [title, setTitle] = useState('');
+    const [language, setLanguage] = useState('');
+    const [releaseDate, setReleaseDate] = useState('');
+    const [voteAverage, setVoteAverage] = useState('');
+    const [genre, setGenre] = useState('');
+    const [selectedGenres, setSelectedGenres] = useState(null);
+
+    const genres = [
+        { name: 'Acción' },
+        { name: 'Aventura' },
+        { name: 'Crimen' },
+    ];
 
     return (
-        <Card className="w-full p-operation-panel" title="Operaciones">
+        <Card className="w-full p-operation-panel" title="Películas">
             <Accordion className="accordion-custom">
                 <AccordionTab
                     header={
                         <React.Fragment>
                             <i className="pi pi-plus-circle mr-3"></i>
-                            <span>Crear nodo</span>
+                            <span>Crear película</span>
                         </React.Fragment>}>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-id-card"></i>
+                        </span>
+                        <InputText placeholder='Título de la película' value={title} onChange={(e) => setTitle(e.target.value)} />
+                    </div>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-globe"></i>
+                        </span>
+                        <InputText className='w-full' placeholder='Idioma original' value={language} onChange={(e) => setLanguage(e.target.value)} />
+                    </div>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-calendar"></i>
+                        </span>
+                        <InputText className='w-full' placeholder='Fecha de estreno' value={releaseDate} onChange={(e) => setReleaseDate(e.target.value)} />
+                    </div>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-star"></i>
+                        </span>
+                        <InputText className='w-full' placeholder='Puntuación' value={voteAverage} onChange={(e) => setVoteAverage(e.target.value)} />
+                    </div>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-tag"></i>
+                        </span>
+                        <MultiSelect value={selectedGenres} options={genres} onChange={(e) => setSelectedGenres(e.value)} optionLabel="name" optionValue="name" placeholder="Selecciona géneros" />
+                    </div>
+                    <Button label="Crear" className='w-full' icon="pi pi-plus" onClick={() => console.log("pelicula creada")} />
                 </AccordionTab>
                 <AccordionTab
                     header={
                         <React.Fragment>
-                            <i className="pi pi-reply mr-3"></i>
-                            <span>Crear relación</span>
+                            <i className="pi pi-plus-circle mr-3"></i>
+                            <span>Crear género</span>
                         </React.Fragment>}>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-                        architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione
-                        voluptatem sequi nesciunt. Consectetur, adipisci velit, sed quia non numquam eius modi.</p>
+                    <div className="p-inputgroup mb-2">
+                        <span className="p-inputgroup-addon">
+                            <i className="pi pi-tag"></i>
+                        </span>
+                        <InputText className='w-full' placeholder='Género' value={genre} onChange={(e) => setGenre(e.target.value)} />
+                    </div>
+                    <Button label="Crear" className='w-full' icon="pi pi-plus" onClick={() => console.log("genero creada")} />
+
                 </AccordionTab>
                 <AccordionTab
                     header={

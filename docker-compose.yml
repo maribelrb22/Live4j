@@ -5,8 +5,8 @@ services:
     volumes:
       - ./neo4j/data:/data
     ports:
-      - "7474"
-      - "7687"
+      - "7474:7474"
+      - "7687:7687"
     networks:
       - backend
   # server:

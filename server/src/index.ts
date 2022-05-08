@@ -1,3 +1,6 @@
-import { WebsocketServer } from './ws/server'
+import { getConfiguration } from './config'
+import { WebsocketServer } from './wss/server'
 
-new WebsocketServer()
+const wss = new WebsocketServer()
+const { WSS_PORT: port } = getConfiguration()
+wss.open(port)

@@ -20,6 +20,5 @@
             "@/*": ["/src/*"]
         }
     },
-
-    "include": ["src", "setup.ts"]
+    "include": ["src/**/*"]
 }

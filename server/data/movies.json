@@ -1,6 +1,5 @@
 [
     {
-        "id": 0,
         "releaseDate": "15/12/2021",
         "name": "Spider-Man: No Way Home",
         "rating": 8.3,
@@ -8,7 +7,6 @@
         "genres": ["Action", "Adventure", "Science Fiction"]
     },
     {
-        "id": 1,
         "releaseDate": "01/03/2022",
         "name": "The Batman",
         "rating": 8.1,
@@ -16,7 +14,6 @@
         "genres": ["Crime", "Mystery", "Thriller"]
     },
     {
-        "id": 2,
         "releaseDate": "25/02/2022",
         "name": "No Exit",
         "rating": 6.3,
@@ -24,7 +21,6 @@
         "genres": ["Thriller"]
     },
     {
-        "id": 3,
         "releaseDate": "24/11/2021",
         "name": "Encanto",
         "rating": 7.7,
@@ -32,7 +28,6 @@
         "genres": ["Animation", "Comedy", "Family", "Fantasy"]
     },
     {
-        "id": 4,
         "releaseDate": "22/12/2021",
         "name": "The King's Man",
         "rating": 7,
@@ -40,7 +35,6 @@
         "genres": ["Action", "Adventure", "Thriller", "War"]
     },
     {
-        "id": 5,
         "releaseDate": "07/01/2022",
         "name": "The Commando",
         "rating": 6.6,
@@ -48,7 +42,6 @@
         "genres": ["Action", "Crime", "Thriller"]
     },
     {
-        "id": 6,
         "releaseDate": "12/01/2022",
         "name": "Scream",
         "rating": 6.8,
@@ -56,7 +49,6 @@
         "genres": ["Horror", "Mystery", "Thriller"]
     },
     {
-        "id": 7,
         "releaseDate": "10/02/2022",
         "name": "Kimi",
         "rating": 6.3,
@@ -64,7 +56,6 @@
         "genres": ["Thriller"]
     },
     {
-        "id": 8,
         "releaseDate": "17/02/2022",
         "name": "Fistful of Vengeance",
         "rating": 5.3,
@@ -72,7 +63,6 @@
         "genres": ["Action", "Crime", "Fantasy"]
     },
     {
-        "id": 9,
         "releaseDate": "03/11/2021",
         "name": "Eternals",
         "rating": 7.2,
@@ -80,7 +70,6 @@
         "genres": ["Science Fiction"]
     },
     {
-        "id": 10,
         "releaseDate": "18/02/2022",
         "name": "Pursuit",
         "rating": 5.9,
@@ -88,7 +77,6 @@
         "genres": ["Action", "Crime", "Thriller"]
     },
     {
-        "id": 11,
         "releaseDate": "06/08/2021",
         "name": "My Hero Academia: World Heroes' Mission",
         "rating": 7.3,
@@ -96,7 +84,6 @@
         "genres": ["Animation", "Action", "Fantasy", "Adventure"]
     },
     {
-        "id": 12,
         "releaseDate": "25/02/2022",
         "name": "Restless",
         "rating": 5.9,
@@ -104,7 +91,6 @@
         "genres": ["Action", "Thriller", "Crime"]
     },
     {
-        "id": 13,
         "releaseDate": "02/12/2021",
         "name": "Nightmare Alley",
         "rating": 7.1,
@@ -112,7 +98,6 @@
         "genres": ["Crime", "Drama", "Thriller"]
     },
     {
-        "id": 14,
         "releaseDate": "28/01/2022",
         "name": "The ice Age Adventures of Buck Wild",
         "rating": 7.1,
@@ -120,7 +105,6 @@
         "genres": ["Animation", "Comedy", "Adventure", "Family"]
     },
     {
-        "id": 15,
         "releaseDate": "25/02/2022",
         "name": "Hotel Transylvania: Transformania",
         "rating": 7,
@@ -128,7 +112,6 @@
         "genres": ["Animation", "Family", "Fantasy", "Comedy", "Adventure"]
     },
     {
-        "id": 16,
         "releaseDate": "18/02/2022",
         "name": "Texas Chainsaw Massacre",
         "rating": 5.1,
@@ -136,7 +119,6 @@
         "genres": ["Horror"]
     },
     {
-        "id": 17,
         "releaseDate": "28/01/2022",
         "name": "The Requin",
         "rating": 4.6,
@@ -144,7 +126,6 @@
         "genres": ["Thriller"]
     },
     {
-        "id": 18,
         "releaseDate": "04/02/2022",
         "name": "Looop Lapeta",
         "rating": 6,
@@ -152,7 +133,6 @@
         "genres": ["Action", "Comedy", "Crime"]
     },
     {
-        "id": 19,
         "releaseDate": "04/11/2021",
         "name": "Red Notice",
         "rating": 6.8,
@@ -160,7 +140,6 @@
         "genres": ["Action", "Comedy", "Crime", "Thriller"]
     },
     {
-        "id": 20,
         "releaseDate": "01/12/2021",
         "name": "Sing 2",
         "rating": 8.2,
@@ -168,7 +147,6 @@
         "genres": ["Animation", "Comedy", "Family", "Music"]
     },
     {
-        "id": 21,
         "releaseDate": "03/01/2022",
         "name": "The Jack in the Box: Awakening",
         "rating": 5.4,
@@ -176,7 +154,6 @@
         "genres": ["Horror"]
     },
     {
-        "id": 22,
         "releaseDate": "30/09/2021",
         "name": "Venom: Let There Be Carnage",
         "rating": 7.1,
@@ -184,7 +161,6 @@
         "genres": ["Science Fiction", "Action", "Adventure"]
     },
     {
-        "id": 23,
         "releaseDate": "16/12/2021",
         "name": "The Matrix Resurrections",
         "rating": 6.8,

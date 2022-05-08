@@ -1,16 +1,17 @@
 import neo4j, { Driver, Session } from 'neo4j-driver'
-import { Neo4jClientActions } from './actions'
-import { getNeo4jConfiguration } from './config'
-import { Neo4jConfiguration } from './types'
+import { getConfiguration } from '../config'
+import { Neo4jConfiguration } from '../types'
+import { Neo4jClientQueries } from './queries'
 
 export class Neo4jClient {
-    private driver: Driver
-    private session: Session
-    public actions: Neo4jClientActions = new Neo4jClientActions(this)
+    private driver!: Driver
+    private session!: Session
+    private opened: boolean
+    public queries: Neo4jClientQueries = new Neo4jClientQueries(this)
 
     constructor(public configuration: Neo4jConfiguration) {
-        this.driver = this.startDriver()
-        this.session = this.startSession()
+        this.opened = false
+        this.open()
     }
 
     private startDriver() {
@@ -34,9 +35,25 @@ export class Neo4jClient {
         return this.session
     }
 
+    open(): void {
+        if (this.opened) {
+            return
+        }
+        this.driver = this.startDriver()
+        this.session = this.startSession()
+        this.opened = true
+        console.log('[4j] connection opened')
+    }
+
     async close(): Promise<void> {
+        if (!this.opened) {
+            return
+        }
+        await this.session.close()
         await this.driver.close()
+        this.opened = false
+        console.log('[4j] connection closed')
     }
 }
 
-export const client4j = new Neo4jClient(getNeo4jConfiguration())
+export const client4j = new Neo4jClient(getConfiguration())

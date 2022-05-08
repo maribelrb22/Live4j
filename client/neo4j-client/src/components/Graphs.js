@@ -1,12 +1,12 @@
 import Graph from "react-graph-vis";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Calendar } from 'primereact/calendar';
 import "../css/Graphs.css";
-import initialData from "../initialData.json";
+import { GraphContext } from "../context/GraphContext";
 
 const Graphs = () => {
     const [filmSelected, setFilmSelected] = useState(false);
@@ -15,28 +15,7 @@ const Graphs = () => {
     const [idSelectedEdge, setIdSelectedEdge] = useState(false);
 
     const yearRange = "1800:" + new Date().getFullYear();
-    const genres = [
-        { id: 24, label: 'Action' },
-        { id: 25, label: 'Adventure' },
-        { id: 26, label: 'Science Fiction' },
-        { id: 27, label: 'Crime' },
-        { id: 28, label: 'Mystery' },
-        { id: 29, label: 'Thriller' },
-    ]
-
-    const [graph] = useState({
-        nodes: (initialData.map(node => ({
-            id: node.id,
-            label: node.name,
-        }))).concat(genres),
-
-        edges: [
-            { id: 1, from: 1, to: 2, label: "arista 1" },
-            { id: 2, from: 1, to: 3, label: "arista 2" },
-            { id: 3, from: 2, to: 4, label: "arista 3" },
-            { id: 4, from: 2, to: 5, label: "arista 4" }
-        ]
-    });
+    const { ready, graph, actions } = useContext(GraphContext)
 
     const options = {
         layout: {

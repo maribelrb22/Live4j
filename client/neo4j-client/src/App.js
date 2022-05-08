@@ -1,17 +1,20 @@
 import './css/App.css';
 import Graphs from "./components/Graphs";
 import GraphOperations from './components/GraphOperations';
+import { GraphContextProvider } from './context/GraphContext';
 
 function App() {
   return (
-    <div className="flex grid App">
-      <div className="col-8">
-        <Graphs />
+    <GraphContextProvider>
+      <div className="flex grid App">
+        <div className="col-8">
+          <Graphs />
+        </div>
+        <div className="col-4">
+          <GraphOperations />
+        </div>
       </div>
-      <div className="col-4">
-        <GraphOperations />
-      </div>
-    </div>
+    </GraphContextProvider>
   );
 }
 

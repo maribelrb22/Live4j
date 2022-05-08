@@ -14,3 +14,13 @@
 .p-inputtext::placeholder {
   opacity: 1 !important;
 }
+
+.p-datepicker-month,
+.p-datepicker-year {
+  background-color: white !important;
+  height: 30px !important;
+}
+
+.errorMessage {
+  color: red;
+}

@@ -1,4 +1,4 @@
-import Graph from "react-graph-vis";
+import VisGraph from "react-vis-graph-wrapper";
 import React, { useContext, useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
@@ -15,11 +15,12 @@ const Graphs = () => {
     const [idSelectedEdge, setIdSelectedEdge] = useState(false);
 
     const yearRange = "1800:" + new Date().getFullYear();
+
     const { ready, graph, actions } = useContext(GraphContext)
 
     const options = {
         layout: {
-            hierarchical: false
+            hierarchical: true
         },
         edges: {
             color: "#000000",
@@ -57,7 +58,7 @@ const Graphs = () => {
 
     return (
         <div>
-            <Graph
+            <VisGraph
                 graph={graph}
                 options={options}
                 events={events}

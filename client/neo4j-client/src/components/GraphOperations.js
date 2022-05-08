@@ -1,32 +1,27 @@
 import { Card } from 'primereact/card';
 import "../css/GraphOperations.css";
 import { Accordion, AccordionTab } from 'primereact/accordion';
-import React, { useState } from 'react';
-import { InputTextarea } from 'primereact/inputtextarea';
+import React, { useState, useContext } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Calendar } from 'primereact/calendar';
+import { GraphContext } from '../context/GraphContext';
 
 const GraphOperations = () => {
-    const [inputQuery, setInputQuery] = useState('');
     const [title, setTitle] = useState('');
     const [language, setLanguage] = useState('');
     const [releaseDate, setReleaseDate] = useState('');
     const [voteAverage, setVoteAverage] = useState('');
     const [genre, setGenre] = useState('');
-    const [selectedGenres, setSelectedGenres] = useState(null);
+    const [selectedGenres, setSelectedGenres] = useState([]);
     const [formErrors, setFormErrors] = useState({});
 
     const yearRange = "1800:" + new Date().getFullYear();
 
-    const genres = [
-        { name: 'Acción' },
-        { name: 'Aventura' },
-        { name: 'Crimen' },
-    ];
+    const { actions, graph: { genres } } = useContext(GraphContext)
 
-    const validateFilm = () => {
+    const validateMovie = () => {
         const errors = {}
 
         if (!title) errors.title = "El título es requerido"
@@ -35,17 +30,19 @@ const GraphOperations = () => {
         if (!voteAverage) errors.voteAverage = "La puntuación es requerida"
 
         setFormErrors(errors)
+
+        actions.addMovie({
+            name: title,
+            language,
+            releaseDate,
+            rating: voteAverage,
+            genres: selectedGenres
+        })
     }
 
     const validateGenre = () => {
         const errors = {}
         if (!genre) errors.genre = "El género es requerido"
-        setFormErrors(errors)
-    }
-
-    const validateQuery = () => {
-        const errors = {}
-        if (!inputQuery) errors.inputQuery = "La consulta es requerida"
         setFormErrors(errors)
     }
 
@@ -94,9 +91,9 @@ const GraphOperations = () => {
                         <span className="p-inputgroup-addon">
                             <i className="pi pi-tag"></i>
                         </span>
-                        <MultiSelect value={selectedGenres} options={genres} onChange={(e) => setSelectedGenres(e.value)} optionLabel="name" optionValue="name" placeholder="Selecciona géneros" />
+                        <MultiSelect value={selectedGenres} options={Object.values(genres)} onChange={(e) => setSelectedGenres(e.value)} optionLabel="name" optionValue="id" placeholder="Selecciona géneros" />
                     </div>
-                    <Button label="Crear" className='w-full mt-3' icon="pi pi-plus" onClick={validateFilm} />
+                    <Button label="Crear" className='w-full mt-3' icon="pi pi-plus" onClick={validateMovie} />
                 </AccordionTab>
                 <AccordionTab
                     header={
@@ -113,18 +110,6 @@ const GraphOperations = () => {
                     {getFieldError("genre")}
                     <Button label="Crear" className='w-full mt-3' icon="pi pi-plus" onClick={validateGenre} />
 
-                </AccordionTab>
-                <AccordionTab
-                    header={
-                        <React.Fragment>
-                            <i className="pi pi-pencil mr-3"></i>
-                            <span>Haz tu propia consulta</span>
-                        </React.Fragment>}>
-                    <div className="flex flex-column">
-                        <InputTextarea className="w-full" value={inputQuery} onChange={(e) => setInputQuery(e.target.value)} rows={5} />
-                        {getFieldError("inputQuery")}
-                        <Button className="mt-3" label="Enviar" icon="pi pi-send" onClick={validateQuery} />
-                    </div>
                 </AccordionTab>
             </Accordion>
         </Card>

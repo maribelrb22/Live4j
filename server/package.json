@@ -15,8 +15,8 @@
         "dotenv": "^16.0.0",
         "express": "^4.17.3",
         "neo4j-driver": "^4.4.5",
-        "socket.io": "^4.4.1",
-        "uuid": "^8.3.2"
+        "uuid": "^8.3.2",
+        "ws": "^8.6.0"
     },
     "devDependencies": {
         "@babel/cli": "^7.17.6",
@@ -25,7 +25,9 @@
         "@babel/node": "^7.16.5",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
+        "@types/node": "^17.0.31",
         "@types/uuid": "^8.3.4",
+        "@types/ws": "^8.5.3",
         "@typescript-eslint/eslint-plugin": "^5.22.0",
         "@typescript-eslint/parser": "^5.22.0",
         "eslint": "^8.12.0",

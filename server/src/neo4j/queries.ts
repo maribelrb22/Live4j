@@ -22,37 +22,38 @@ export class Neo4jClientQueries {
         return result.records.map((record) => record.toObject()[key] as T)
     }
 
-    private cacheMovies(movies: Movie[], silent = true) {
+    private cacheMovies(movies: Movie[], silent = false) {
         this.cache.movies = movies
         this.cache.isMovieCacheInvalidated = false
         !silent && console.log(`[4j/cache] movie cache has been restored`)
     }
 
-    private cacheGenres(genres: Genre[], silent = true) {
+    private cacheGenres(genres: Genre[], silent = false) {
         this.cache.genres = genres
         this.cache.isGenreCacheInvalidated = false
         !silent && console.log(`[4j/cache] genre cache has been restored`)
     }
 
-    private invalidateMovies(silent = true) {
+    private invalidateMovies(silent = false) {
         this.cache.isMovieCacheInvalidated = true
         !silent && console.log(`[4j/cache] invalidated movie cache`)
     }
 
-    private invalidateGenres(silent = true) {
+    private invalidateGenres(silent = false) {
         this.cache.isGenreCacheInvalidated = true
         !silent && console.log(`[4j/cache] invalidated genre cache`)
     }
 
     async getAllMovies(): Promise<Movie[]> {
         if (!this.cache.isMovieCacheInvalidated) {
+            console.log('[4j/cache] using movie cache')
             return this.cache.movies
         }
 
         let result: QueryResult
         try {
             result = await this.client4j.getSession().writeTransaction((tx) =>
-                tx.run(`MATCH (n:Movie)
+                tx.run(`MATCH (n:Movie)-->(m:Genre)
                         RETURN {
                             id: n.id,
                             name: n.name,
@@ -154,6 +155,7 @@ export class Neo4jClientQueries {
 
     async getAllGenres(): Promise<Genre[]> {
         if (!this.cache.isGenreCacheInvalidated) {
+            console.log('[4j/cache] using genre cache')
             return this.cache.genres
         }
 
@@ -226,10 +228,18 @@ export class Neo4jClientQueries {
         }
     }
 
-    async getAll(): Promise<{ movies: Movie[]; genres: Genre[] }> {
+    async getAll(): Promise<{ movies: Record<string, Movie>; genres: Record<string, Genre> }> {
+        const movies: Record<string, Movie> = (await this.getAllMovies()).reduce((acc, movie) => ({
+            ...acc,
+            [movie.id]: movie
+        }), {})
+        const genres: Record<string, Genre> = (await this.getAllGenres()).reduce((acc, genre) => ({
+            ...acc,
+            [genre.id]: genre
+        }), {})
         return {
-            movies: await this.getAllMovies(),
-            genres: await this.getAllGenres()
+            movies,
+            genres
         }
     }
 

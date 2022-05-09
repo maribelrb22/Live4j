@@ -24,7 +24,11 @@ export const GraphContextProvider = ({ children }) => {
         id: movie.id,
         label: movie.name,
         type: "movie",
-        color: "#ff8888",
+        color: "#ff9999",
+        title: `Idioma: ${movie.language}
+          Fecha de estreno: ${new Date(movie.releaseDate).toLocaleDateString()}
+          Puntuación: ${movie.rating}
+        `,
       });
 
       movie.genres.forEach((genreId, y) => {
@@ -32,16 +36,17 @@ export const GraphContextProvider = ({ children }) => {
           id: `${x}-${y}`,
           from: movie.id,
           to: genreId,
+          length: 200
         });
       });
     });
-    
+
     Object.values(genres).forEach((genre) => {
       nodes.push({
         id: genre.id,
         label: genre.name,
         type: "genre",
-        color: "#88ff88",
+        color: "#99ff99",
       });
     });
 
@@ -51,6 +56,7 @@ export const GraphContextProvider = ({ children }) => {
       movies,
       genres,
     });
+    setIsReady(true);
   }
 
   useEffect(() => {
@@ -90,8 +96,6 @@ export const GraphContextProvider = ({ children }) => {
         socket.send(JSON.stringify({ type: 'deleteGenre', data: id }));
       },
     });
-
-    setIsReady(true);
   }, [socket]);
 
   return (

@@ -7,10 +7,10 @@ function App() {
   return (
     <GraphContextProvider>
       <div className="flex grid App">
-        <div className="col-8">
+        <div className="col-9">
           <Graphs />
         </div>
-        <div className="col-4">
+        <div className="col-3">
           <GraphOperations />
         </div>
       </div>

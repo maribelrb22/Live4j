@@ -1,5 +1,5 @@
 import VisGraph from "react-vis-graph-wrapper";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -7,12 +7,13 @@ import { MultiSelect } from 'primereact/multiselect';
 import { Calendar } from 'primereact/calendar';
 import "../css/Graphs.css";
 import { GraphContext } from "../context/GraphContext";
+import { ProgressSpinner } from 'primereact/progressspinner';
 
 const Graphs = () => {
-    const [filmSelected, setFilmSelected] = useState(false);
+    const [movieSelected, setMovieSelected] = useState(false);
     const [genreSelected, setGenreSelected] = useState(false);
     const [edgeSelected, setEdgeSelected] = useState(false);
-    const [selectedFilmId, setSelectedFilmId] = useState(null);
+    const [selectedMovieId, setSelectedMovieId] = useState(null);
     const [selectedGenreId, setSelectedGenreId] = useState(null);
     const [selectedEdgeId, setSelectedEdgeId] = useState(null);
 
@@ -25,7 +26,7 @@ const Graphs = () => {
 
     const yearRange = "1800:" + new Date().getFullYear();
 
-    const { ready, graph, actions } = useContext(GraphContext)
+    const { isReady, graph, actions } = useContext(GraphContext)
 
     const options = {
         layout: {
@@ -42,13 +43,13 @@ const Graphs = () => {
                 const [nodeId] = nodes
                 if (graph.movies.hasOwnProperty(nodeId)) {
                     const movie = graph.movies[nodeId]
-                    setSelectedFilmId(nodeId)
+                    setSelectedMovieId(nodeId)
                     setTitle(movie.name)
                     setLanguage(movie.language)
                     setReleaseDate(new Date(movie.releaseDate))
                     setVoteAverage(movie.rating)
                     setSelectedGenres(movie.genres)
-                    setFilmSelected(true)
+                    setMovieSelected(true)
                 } else {
                     setSelectedGenreId(nodeId)
                     setGenreSelected(true)
@@ -61,9 +62,9 @@ const Graphs = () => {
         }
     };
 
-    const onDeleteFilm = () => {
-        actions.deleteMovie(selectedFilmId)
-        setFilmSelected(false)
+    const onDeleteMovie = () => {
+        actions.deleteMovie(selectedMovieId)
+        setMovieSelected(false)
     }
 
     const onDeleteGenre = () => {
@@ -81,7 +82,7 @@ const Graphs = () => {
         setEdgeSelected(false)
     }
 
-    const validateEditFilm = () => {
+    const validateEditMovie = () => {
         const errors = {}
 
         if (!title) errors.title = "El título es requerido"
@@ -93,16 +94,15 @@ const Graphs = () => {
 
         if (!Object.values(errors).length) {
             actions.updateMovie({
-                id: selectedFilmId,
+                id: selectedMovieId,
                 name: title,
                 language,
                 releaseDate,
                 rating: voteAverage,
                 genres: selectedGenres
             })
+            setMovieSelected(false)
         }
-
-        setFilmSelected(false)
     }
 
     const getFieldError = (field) => {
@@ -111,14 +111,18 @@ const Graphs = () => {
 
     return (
         <div>
+            {!isReady ? <ProgressSpinner /> : ""}
             <VisGraph
                 graph={graph}
                 options={options}
                 events={events}
             />
 
-            <Dialog header="Propiedades de la película" className="w-4" visible={filmSelected} onHide={() => setFilmSelected(false)}>
+            <Dialog header="Propiedades de la película" className="w-4" visible={movieSelected} onHide={() => setMovieSelected(false)}>
                 <div className="p-inputgroup mb-2">
+                    <span className="p-inputgroup-addon">
+                        <i className="pi pi-id-card"></i>
+                    </span>
                     <InputText placeholder='Título de la película' value={title} onChange={(e) => setTitle(e.target.value)} />
                 </div>
                 {getFieldError("title")}
@@ -151,10 +155,10 @@ const Graphs = () => {
                 </div>
                 <div className="grid w-full m-auto">
                     <div className="col-12 md:col-6">
-                        <Button label="Editar" icon="pi pi-pencil" className="w-full h-full" onClick={validateEditFilm} />
+                        <Button label="Editar" icon="pi pi-pencil" className="w-full h-full" onClick={validateEditMovie} />
                     </div>
                     <div className="col-12 md:col-6">
-                        <Button label="Eliminar" className="p-button-danger w-full h-full" icon="pi pi-minus-circle" onClick={onDeleteFilm} />
+                        <Button label="Eliminar" className="p-button-danger w-full h-full" icon="pi pi-minus-circle" onClick={onDeleteMovie} />
                     </div>
                 </div>
             </Dialog>

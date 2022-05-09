@@ -59,7 +59,7 @@ const GraphOperations = () => {
     }
 
     return (
-        <Card className="w-full p-operation-panel" title="Películas">
+        <Card className="w-full" title="Películas">
             <Accordion className="accordion-custom">
                 <AccordionTab
                     header={
@@ -99,7 +99,7 @@ const GraphOperations = () => {
                         <span className="p-inputgroup-addon">
                             <i className="pi pi-tag"></i>
                         </span>
-                        <MultiSelect value={selectedGenres} options={Object.values(genres)} onChange={(e) => setSelectedGenres(e.value)} optionLabel="name" optionValue="id" placeholder="Selecciona géneros" />
+                        <MultiSelect value={selectedGenres} options={Object.values(genres)} onChange={(e) => setSelectedGenres(e.value)} optionLabel="name" optionValue="id" placeholder="Género(s)" />
                     </div>
                     <Button label="Crear" className='w-full mt-3' icon="pi pi-plus" onClick={validateMovie} />
                 </AccordionTab>
@@ -113,7 +113,7 @@ const GraphOperations = () => {
                         <span className="p-inputgroup-addon">
                             <i className="pi pi-tag"></i>
                         </span>
-                        <InputText className='w-full' placeholder='Género' value={genre} onChange={(e) => setGenre(e.target.value)} />
+                        <InputText className='w-full' placeholder='Nombre' value={genre} onChange={(e) => setGenre(e.target.value)} />
                     </div>
                     {getFieldError("genre")}
                     <Button label="Crear" className='w-full mt-3' icon="pi pi-plus" onClick={validateGenre} />

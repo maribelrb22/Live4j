@@ -19,7 +19,7 @@ export const GraphContextProvider = ({ children }) => {
     const nodes = [];
     const edges = [];
 
-    Object.values(movies).forEach((movie) => {
+    Object.values(movies).forEach((movie, x) => {
       nodes.push({
         id: movie.id,
         label: movie.name,
@@ -29,6 +29,7 @@ export const GraphContextProvider = ({ children }) => {
 
       movie.genres.forEach((genreId, y) => {
         edges.push({
+          id: `${x}-${y}`,
           from: movie.id,
           to: genreId,
         });
@@ -79,7 +80,7 @@ export const GraphContextProvider = ({ children }) => {
       deleteMovie(id) {
         socket.send(JSON.stringify({ type: 'deleteMovie', data: id }));
       },
-      createGenre(genre) {
+      addGenre(genre) {
         socket.send(JSON.stringify({ type: 'addGenre', data: genre }));
       },
       updateGenre(genre) {

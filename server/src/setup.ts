@@ -1,4 +1,4 @@
-import movies from '../data/movies.json'
+import { movies, genres } from '../data/setupData.json'
 import { client4j } from './neo4j/client'
 
 async function setup() {
@@ -10,17 +10,16 @@ async function setup() {
     }
 
     console.log('[4j/setup] creating genres')
-    const genres = movies.reduce((acc, movie) => {
-        movie.genres.forEach((genre) => acc.add(genre))
-        return acc
-    }, new Set<string>())
 
-    const genresList = Array.from(genres)
-    for (const genreName of genresList) {
-        if (!(await client4j.queries.addGenre({ name: genreName }))) {
-            console.log('[4j/setup] aborting setup')
-            return
+    try {
+        for (const genre of genres) {
+            await client4j.getSession().writeTransaction((tx) => {
+                tx.run(`CREATE (n:Genre { id: $id, name: $name })`, genre)
+            })
         }
+    } catch (e) {
+        console.log('[4j/setup] aborting setup')
+        return
     }
 
     console.log('[4j/setup] creating movies and relationships')

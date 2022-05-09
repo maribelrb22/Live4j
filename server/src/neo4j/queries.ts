@@ -50,52 +50,80 @@ export class Neo4jClientQueries {
             return this.cache.movies
         }
 
-        let result: QueryResult
+        let moviesWithGenres, moviesWithoutGenres: QueryResult
         try {
-            result = await this.client4j.getSession().writeTransaction((tx) =>
-                tx.run(`MATCH (n:Movie)-->(m:Genre)
+            moviesWithGenres = await this.client4j
+                .getSession()
+                .writeTransaction((tx) =>
+                    tx.run(`MATCH (n:Movie)-[:BELONGS_TO]->(m:Genre)
+                            RETURN {
+                                id: n.id,
+                                name: n.name,
+                                releaseDate: n.releaseDate,
+                                rating: n.rating,
+                                language: n.language,
+                                genres: collect(m.id)
+                            } as movie`)
+                )
+
+            moviesWithoutGenres = await this.client4j
+                .getSession()
+                .writeTransaction((tx) =>
+                    tx.run(
+                        `MATCH (n:Movie) WHERE NOT (n)-[:BELONGS_TO]->(:Genre)
                         RETURN {
                             id: n.id,
                             name: n.name,
                             releaseDate: n.releaseDate,
                             rating: n.rating,
-                            language: n.language,
-                            genres: collect(m.id)
-                        } as movie`)
-            )
+                            language: n.language
+                        } as movie`
+                    )
+                )
         } catch (e) {
             return []
         }
 
-        const movies: Movie[] = this.mapResultToArray(result, 'movie')
+        const movies: Movie[] = [
+            ...this.mapResultToArray<Movie>(moviesWithGenres, 'movie'),
+            ...this.mapResultToArray<Movie>(moviesWithoutGenres, 'movie').map(
+                (movie) => ({
+                    ...movie,
+                    genres: []
+                })
+            )
+        ]
         setTimeout(() => this.cacheMovies(movies), 0)
         return movies
     }
 
     async addMovie(movie: Omit<Movie, 'id'>): Promise<boolean> {
-        try {
-            const createdMovie: Movie = {
-                ...movie,
-                id: uuidv4()
-            }
+        const createdMovie: Movie = {
+            ...movie,
+            id: uuidv4()
+        }
 
-            this.invalidateMovies()
+        this.invalidateMovies()
+
+        try {
             await this.client4j.getSession().writeTransaction((tx) => {
                 tx.run(
                     `CREATE (n:Movie { id: $id, name: $name, releaseDate: $releaseDate, rating: $rating, language: $language })`,
                     createdMovie
                 )
             })
-            return await this.matchMovieWithGenres(createdMovie)
         } catch (e) {
             console.log(`[4j/query] error ocurred: ${e}`)
             return false
         }
+
+        return await this.matchMovieWithGenres(createdMovie)
     }
 
     async updateMovie(movie: Movie): Promise<boolean> {
         try {
             this.invalidateMovies()
+
             await this.client4j.getSession().writeTransaction((tx) => {
                 tx.run(
                     `MATCH (n:Movie { id: $id })
@@ -103,11 +131,13 @@ export class Neo4jClientQueries {
                     movie
                 )
 
-                tx.run(`
-                    MATCH (:Movie { id: $id })-[r]->(:Genre)
-                    DELETE r
-                `)
+                tx.run(
+                    `MATCH (:Movie { id: $id })-[r]->(:Genre)
+                    DELETE r`,
+                    movie
+                )
             })
+
             return await this.matchMovieWithGenres(movie)
         } catch (e) {
             console.log(`[4j/query] error ocurred: ${e}`)
@@ -118,13 +148,13 @@ export class Neo4jClientQueries {
     async matchMovieWithGenres(movie: Movie): Promise<boolean> {
         try {
             await this.client4j.getSession().writeTransaction((tx) => {
-                movie.genres.forEach((genre) => {
+                movie.genres.forEach((genreId) => {
                     tx.run(
-                        `MATCH (movie:Movie { id: $movieId }), (genre:Genre { name: $genreName })
+                        `MATCH (movie:Movie { id: $movieId }), (genre:Genre { id: $genreId })
                          CREATE (movie)-[r:BELONGS_TO]->(genre)`,
                         {
                             movieId: movie.id,
-                            genreName: genre
+                            genreId
                         }
                     )
                 })
@@ -143,7 +173,7 @@ export class Neo4jClientQueries {
                 tx.run(
                     `MATCH (n:Movie { id: $id })
                      DETACH DELETE n`,
-                    id
+                    { id }
                 )
             )
             return true
@@ -218,7 +248,7 @@ export class Neo4jClientQueries {
                 tx.run(
                     `MATCH (n:Genre { id: $id })
                      DETACH DELETE n`,
-                    id
+                    { id }
                 )
             )
             return true
@@ -228,15 +258,28 @@ export class Neo4jClientQueries {
         }
     }
 
-    async getAll(): Promise<{ movies: Record<string, Movie>; genres: Record<string, Genre> }> {
-        const movies: Record<string, Movie> = (await this.getAllMovies()).reduce((acc, movie) => ({
-            ...acc,
-            [movie.id]: movie
-        }), {})
-        const genres: Record<string, Genre> = (await this.getAllGenres()).reduce((acc, genre) => ({
-            ...acc,
-            [genre.id]: genre
-        }), {})
+    async getAll(): Promise<{
+        movies: Record<string, Movie>
+        genres: Record<string, Genre>
+    }> {
+        const movies: Record<string, Movie> = (
+            await this.getAllMovies()
+        ).reduce(
+            (acc, movie) => ({
+                ...acc,
+                [movie.id]: movie
+            }),
+            {}
+        )
+        const genres: Record<string, Genre> = (
+            await this.getAllGenres()
+        ).reduce(
+            (acc, genre) => ({
+                ...acc,
+                [genre.id]: genre
+            }),
+            {}
+        )
         return {
             movies,
             genres

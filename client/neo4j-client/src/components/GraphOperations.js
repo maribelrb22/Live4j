@@ -31,19 +31,27 @@ const GraphOperations = () => {
 
         setFormErrors(errors)
 
-        actions.addMovie({
-            name: title,
-            language,
-            releaseDate,
-            rating: voteAverage,
-            genres: selectedGenres
-        })
+        if (!Object.values(errors).length) {
+            actions.addMovie({
+                name: title,
+                language,
+                releaseDate,
+                rating: voteAverage,
+                genres: selectedGenres
+            })
+        }
     }
 
     const validateGenre = () => {
         const errors = {}
         if (!genre) errors.genre = "El género es requerido"
         setFormErrors(errors)
+
+        if (!Object.values(errors).length) {
+            actions.addGenre({
+                name: genre
+            })
+        }
     }
 
     const getFieldError = (field) => {
@@ -109,7 +117,6 @@ const GraphOperations = () => {
                     </div>
                     {getFieldError("genre")}
                     <Button label="Crear" className='w-full mt-3' icon="pi pi-plus" onClick={validateGenre} />
-
                 </AccordionTab>
             </Accordion>
         </Card>

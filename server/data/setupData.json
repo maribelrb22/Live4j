@@ -1,0 +1,310 @@
+{
+    "genres": [
+        {
+            "id": "805a517f-f48b-4ca6-b44b-a55080f5354",
+            "name": "Action"
+        },
+        {
+            "id": "a2e3f1fa-bc71-4641-86f7-182a69482c3",
+            "name": "Adventure"
+        },
+        {
+            "id": "e9151266-c229-4ed5-a359-7bbc7492f83",
+            "name": "Science Fiction"
+        },
+        {
+            "id": "b55da79d-4137-41b6-9412-9cc0fc2d18f",
+            "name": "Crime"
+        },
+        {
+            "id": "6d3cced8-5829-498c-9d6b-629461efb73",
+            "name": "Mystery"
+        },
+        {
+            "id": "25b37e3f-4e4f-4e18-ab0a-8f025be402f",
+            "name": "Thriller"
+        },
+        {
+            "id": "6bc5a138-66cc-48f2-b1da-a1c20f4a7a1",
+            "name": "Animation"
+        },
+        {
+            "id": "fdef8295-abf3-4d4b-a240-a03f89c7554",
+            "name": "Comedy"
+        },
+        {
+            "id": "ab1267bc-02c6-4fbd-b677-78c9cfc9e27",
+            "name": "Family"
+        },
+        {
+            "id": "2fae5445-fa72-4e6c-ac64-0c821f8bda1",
+            "name": "Fantasy"
+        },
+        {
+            "id": "bd8953ac-080b-481e-8472-9b5362157a2",
+            "name": "War"
+        },
+        {
+            "id": "27e4d180-9173-48f4-b76a-ec13bd19534",
+            "name": "Horror"
+        },
+        {
+            "id": "820c58c0-9140-47e7-9a8e-4ad418b2cd9",
+            "name": "Drama"
+        },
+        {
+            "id": "0678e6ed-b82a-426b-b27d-fe5116288940",
+            "name": "Music"
+        }
+    ],
+    "movies": [
+        {
+            "releaseDate": "12/15/2021",
+            "name": "Spider-Man: No Way Home",
+            "rating": 8.3,
+            "language": "en",
+            "genres": [
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "a2e3f1fa-bc71-4641-86f7-182a69482c3",
+                "e9151266-c229-4ed5-a359-7bbc7492f83"
+            ]
+        },
+        {
+            "releaseDate": "03/01/2022",
+            "name": "The Batman",
+            "rating": 8.1,
+            "language": "en",
+            "genres": [
+                "b55da79d-4137-41b6-9412-9cc0fc2d18f",
+                "6d3cced8-5829-498c-9d6b-629461efb73",
+                "25b37e3f-4e4f-4e18-ab0a-8f025be402f"
+            ]
+        },
+        {
+            "releaseDate": "02/25/2022",
+            "name": "No Exit",
+            "rating": 6.3,
+            "language": "en",
+            "genres": ["25b37e3f-4e4f-4e18-ab0a-8f025be402f"]
+        },
+        {
+            "releaseDate": "11/24/2021",
+            "name": "Encanto",
+            "rating": 7.7,
+            "language": "en",
+            "genres": [
+                "6bc5a138-66cc-48f2-b1da-a1c20f4a7a1",
+                "fdef8295-abf3-4d4b-a240-a03f89c7554",
+                "ab1267bc-02c6-4fbd-b677-78c9cfc9e27",
+                "2fae5445-fa72-4e6c-ac64-0c821f8bda1"
+            ]
+        },
+        {
+            "releaseDate": "12/22/2021",
+            "name": "The King's Man",
+            "rating": 7,
+            "language": "en",
+            "genres": [
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "a2e3f1fa-bc71-4641-86f7-182a69482c3",
+                "25b37e3f-4e4f-4e18-ab0a-8f025be402f",
+                "bd8953ac-080b-481e-8472-9b5362157a2"
+            ]
+        },
+        {
+            "releaseDate": "01/07/2022",
+            "name": "The Commando",
+            "rating": 6.6,
+            "language": "en",
+            "genres": [
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "b55da79d-4137-41b6-9412-9cc0fc2d18f",
+                "25b37e3f-4e4f-4e18-ab0a-8f025be402f"
+            ]
+        },
+        {
+            "releaseDate": "01/12/2022",
+            "name": "Scream",
+            "rating": 6.8,
+            "language": "en",
+            "genres": [
+                "27e4d180-9173-48f4-b76a-ec13bd19534",
+                "6d3cced8-5829-498c-9d6b-629461efb73",
+                "25b37e3f-4e4f-4e18-ab0a-8f025be402f"
+            ]
+        },
+        {
+            "releaseDate": "02/10/2022",
+            "name": "Kimi",
+            "rating": 6.3,
+            "language": "en",
+            "genres": ["25b37e3f-4e4f-4e18-ab0a-8f025be402f"]
+        },
+        {
+            "releaseDate": "02/17/2022",
+            "name": "Fistful of Vengeance",
+            "rating": 5.3,
+            "language": "en",
+            "genres": [
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "b55da79d-4137-41b6-9412-9cc0fc2d18f",
+                "2fae5445-fa72-4e6c-ac64-0c821f8bda1"
+            ]
+        },
+        {
+            "releaseDate": "11/03/2021",
+            "name": "Eternals",
+            "rating": 7.2,
+            "language": "en",
+            "genres": ["e9151266-c229-4ed5-a359-7bbc7492f83"]
+        },
+        {
+            "releaseDate": "02/18/2022",
+            "name": "Pursuit",
+            "rating": 5.9,
+            "language": "en",
+            "genres": [
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "b55da79d-4137-41b6-9412-9cc0fc2d18f",
+                "25b37e3f-4e4f-4e18-ab0a-8f025be402f"
+            ]
+        },
+        {
+            "releaseDate": "08/06/2021",
+            "name": "My Hero Academia: World Heroes' Mission",
+            "rating": 7.3,
+            "language": "ja",
+            "genres": [
+                "6bc5a138-66cc-48f2-b1da-a1c20f4a7a1",
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "2fae5445-fa72-4e6c-ac64-0c821f8bda1",
+                "a2e3f1fa-bc71-4641-86f7-182a69482c3"
+            ]
+        },
+        {
+            "releaseDate": "02/25/2022",
+            "name": "Restless",
+            "rating": 5.9,
+            "language": "fr",
+            "genres": [
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "25b37e3f-4e4f-4e18-ab0a-8f025be402f",
+                "b55da79d-4137-41b6-9412-9cc0fc2d18f"
+            ]
+        },
+        {
+            "releaseDate": "12/02/2021",
+            "name": "Nightmare Alley",
+            "rating": 7.1,
+            "language": "en",
+            "genres": [
+                "b55da79d-4137-41b6-9412-9cc0fc2d18f",
+                "820c58c0-9140-47e7-9a8e-4ad418b2cd9",
+                "25b37e3f-4e4f-4e18-ab0a-8f025be402f"
+            ]
+        },
+        {
+            "releaseDate": "01/28/2022",
+            "name": "The ice Age Adventures of Buck Wild",
+            "rating": 7.1,
+            "language": "en",
+            "genres": [
+                "6bc5a138-66cc-48f2-b1da-a1c20f4a7a1",
+                "fdef8295-abf3-4d4b-a240-a03f89c7554",
+                "a2e3f1fa-bc71-4641-86f7-182a69482c3",
+                "ab1267bc-02c6-4fbd-b677-78c9cfc9e27"
+            ]
+        },
+        {
+            "releaseDate": "02/25/2022",
+            "name": "Hotel Transylvania: Transformania",
+            "rating": 7,
+            "language": "en",
+            "genres": [
+                "6bc5a138-66cc-48f2-b1da-a1c20f4a7a1",
+                "ab1267bc-02c6-4fbd-b677-78c9cfc9e27",
+                "2fae5445-fa72-4e6c-ac64-0c821f8bda1",
+                "fdef8295-abf3-4d4b-a240-a03f89c7554",
+                "a2e3f1fa-bc71-4641-86f7-182a69482c3"
+            ]
+        },
+        {
+            "releaseDate": "02/18/2022",
+            "name": "Texas Chainsaw Massacre",
+            "rating": 5.1,
+            "language": "en",
+            "genres": ["27e4d180-9173-48f4-b76a-ec13bd19534"]
+        },
+        {
+            "releaseDate": "01/28/2022",
+            "name": "The Requin",
+            "rating": 4.6,
+            "language": "en",
+            "genres": ["25b37e3f-4e4f-4e18-ab0a-8f025be402f"]
+        },
+        {
+            "releaseDate": "02/04/2022",
+            "name": "Looop Lapeta",
+            "rating": 6,
+            "language": "hi",
+            "genres": [
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "fdef8295-abf3-4d4b-a240-a03f89c7554",
+                "b55da79d-4137-41b6-9412-9cc0fc2d18f"
+            ]
+        },
+        {
+            "releaseDate": "11/04/2021",
+            "name": "Red Notice",
+            "rating": 6.8,
+            "language": "en",
+            "genres": [
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "fdef8295-abf3-4d4b-a240-a03f89c7554",
+                "b55da79d-4137-41b6-9412-9cc0fc2d18f",
+                "25b37e3f-4e4f-4e18-ab0a-8f025be402f"
+            ]
+        },
+        {
+            "releaseDate": "12/01/2021",
+            "name": "Sing 2",
+            "rating": 8.2,
+            "language": "en",
+            "genres": [
+                "6bc5a138-66cc-48f2-b1da-a1c20f4a7a1",
+                "fdef8295-abf3-4d4b-a240-a03f89c7554",
+                "ab1267bc-02c6-4fbd-b677-78c9cfc9e27",
+                "0678e6ed-b82a-426b-b27d-fe5116288940"
+            ]
+        },
+        {
+            "releaseDate": "01/03/2022",
+            "name": "The Jack in the Box: Awakening",
+            "rating": 5.4,
+            "language": "en",
+            "genres": ["27e4d180-9173-48f4-b76a-ec13bd19534"]
+        },
+        {
+            "releaseDate": "09/30/2021",
+            "name": "Venom: Let There Be Carnage",
+            "rating": 7.1,
+            "language": "en",
+            "genres": [
+                "e9151266-c229-4ed5-a359-7bbc7492f83",
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "a2e3f1fa-bc71-4641-86f7-182a69482c3"
+            ]
+        },
+        {
+            "releaseDate": "12/16/2021",
+            "name": "The Matrix Resurrections",
+            "rating": 6.8,
+            "language": "en",
+            "genres": [
+                "e9151266-c229-4ed5-a359-7bbc7492f83",
+                "805a517f-f48b-4ca6-b44b-a55080f5354",
+                "a2e3f1fa-bc71-4641-86f7-182a69482c3"
+            ]
+        }
+    ]
+}

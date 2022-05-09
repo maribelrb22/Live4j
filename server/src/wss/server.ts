@@ -25,7 +25,9 @@ export class WebsocketServer {
         this.wss = new WebSocketServer({
             port
         })
-        this.wss.on('connection', (ws) => this.handlers.connection(ws))
+        this.wss.on('connection', (ws) => {
+            this.handlers.connection(ws)
+        })
         this.opened = true
         console.log(`[wss4j] ready at ::${port}`)
     }
@@ -42,6 +44,6 @@ export class WebsocketServer {
     }
 
     emitToAll(data: any): void {
-        this.wss.emit('message', data)
+        this.wss.clients.forEach((client) => client.send(data))
     }
 }

@@ -20,7 +20,10 @@ export class Neo4jClient {
             neo4j.auth.basic(
                 this.configuration.NEO4J_USERNAME,
                 this.configuration.NEO4J_PASSWORD
-            )
+            ),
+            {
+                connectionTimeout: -1
+            }
         )
     }
 

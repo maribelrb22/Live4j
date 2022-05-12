@@ -1,18 +1,35 @@
 version: "3.9"
 services:
-  neo4j-server:
+  neo4j-database:
     image: neo4j
     volumes:
-      - ./neo4j/data:/data
-    ports:
-      - "7474:7474"
-      - "7687:7687"
+      - neo4j-database-data:/data
     networks:
       - backend
-  # server:
-  #  build: ./server
-  #  network: backend
-  #  environment:
-  #    - NEO4J_SERVER=neo4j-server
+    environment:
+      - NEO4J_AUTH=neo4j/thisiscbd
+  server:
+    depends_on:
+      - neo4j-database
+    command: ["./wait-for-it.sh", "-t", "0", "neo4j-database:7474", "--", "sh", "docker-start.sh"]
+    build: ./server
+    networks:
+      - backend
+      - frontend
+    ports:
+      - "3123:3123"
+  client:
+    build: ./client/neo4j-client
+    depends_on:
+      - server
+    ports:
+      - "80:80"
+    networks:
+      - frontend
+
 networks:
   backend:
+  frontend:
+
+volumes:
+  neo4j-database-data:

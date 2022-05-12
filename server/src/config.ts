@@ -1,7 +1,14 @@
 import dotenv from 'dotenv'
+import path from 'path'
 import { GlobalConfiguration } from './types'
 
-dotenv.config()
+const configFilePath = path.resolve(
+    process.cwd(),
+    process.env.NODE_ENV === 'production' ? '.env.prod' : '.env'
+)
+dotenv.config({
+    path: configFilePath
+})
 
 const DEFAULT_CONFIGURATION: GlobalConfiguration = {
     NEO4J_SERVER: 'neo4j://localhost',
@@ -20,5 +27,11 @@ export function getConfiguration(): GlobalConfiguration {
         WSS_PORT = DEFAULT_CONFIGURATION.WSS_PORT
     } = process.env
 
-    return { NEO4J_DATABASE, NEO4J_SERVER, NEO4J_USERNAME, NEO4J_PASSWORD, WSS_PORT: Number(WSS_PORT) }
+    return {
+        NEO4J_DATABASE,
+        NEO4J_SERVER,
+        NEO4J_USERNAME,
+        NEO4J_PASSWORD,
+        WSS_PORT: Number(WSS_PORT)
+    }
 }

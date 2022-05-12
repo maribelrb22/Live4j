@@ -1,12 +1,13 @@
 import { Card } from 'primereact/card';
 import "../css/GraphOperations.css";
 import { Accordion, AccordionTab } from 'primereact/accordion';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { MultiSelect } from 'primereact/multiselect';
 import { Calendar } from 'primereact/calendar';
 import { GraphContext } from '../context/GraphContext';
+import { Messages } from 'primereact/messages';
 
 const GraphOperations = () => {
     const [title, setTitle] = useState('');
@@ -16,6 +17,7 @@ const GraphOperations = () => {
     const [genre, setGenre] = useState('');
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [formErrors, setFormErrors] = useState({});
+    const message = useRef(null);
 
     const yearRange = "1800:" + new Date().getFullYear();
 
@@ -39,6 +41,7 @@ const GraphOperations = () => {
                 rating: voteAverage,
                 genres: selectedGenres
             })
+            message.current.show({ severity: 'success', detail: 'Película añadida correctamente' });
         }
     }
 
@@ -51,6 +54,7 @@ const GraphOperations = () => {
             actions.addGenre({
                 name: genre
             })
+            message.current.show({ severity: 'success', detail: 'Género añadido correctamente' });
         }
     }
 
@@ -60,6 +64,7 @@ const GraphOperations = () => {
 
     return (
         <Card className="w-full" title="Películas">
+            <Messages ref={message} />
             <Accordion className="accordion-custom">
                 <AccordionTab
                     header={

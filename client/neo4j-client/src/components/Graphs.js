@@ -1,5 +1,5 @@
 import VisGraph from "react-vis-graph-wrapper";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
@@ -8,6 +8,7 @@ import { Calendar } from 'primereact/calendar';
 import "../css/Graphs.css";
 import { GraphContext } from "../context/GraphContext";
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { Messages } from 'primereact/messages';
 
 const Graphs = () => {
     const [movieSelected, setMovieSelected] = useState(false);
@@ -23,6 +24,7 @@ const Graphs = () => {
     const [voteAverage, setVoteAverage] = useState('');
     const [selectedGenres, setSelectedGenres] = useState([]);
     const [formErrors, setFormErrors] = useState({});
+    const message = useRef(null);
 
     const yearRange = "1800:" + new Date().getFullYear();
 
@@ -65,11 +67,13 @@ const Graphs = () => {
     const onDeleteMovie = () => {
         actions.deleteMovie(selectedMovieId)
         setMovieSelected(false)
+        message.current.show({ severity: 'success', detail: 'Película eliminada correctamente' });
     }
 
     const onDeleteGenre = () => {
         actions.deleteGenre(selectedGenreId)
         setGenreSelected(false)
+        message.current.show({ severity: 'success', detail: 'Género eliminado correctamente' });
     }
 
     const onDeleteRelationship = () => {
@@ -80,6 +84,7 @@ const Graphs = () => {
             genres: movieToUpdate.genres.filter((genreId) => genreId !== edge.to)
         })
         setEdgeSelected(false)
+        message.current.show({ severity: 'success', detail: 'Relación eliminada correctamente' });
     }
 
     const validateEditMovie = () => {
@@ -102,6 +107,7 @@ const Graphs = () => {
                 genres: selectedGenres
             })
             setMovieSelected(false)
+            message.current.show({ severity: 'success', detail: 'Película actualizada correctamente' });
         }
     }
 
@@ -111,6 +117,7 @@ const Graphs = () => {
 
     return (
         <div>
+            <Messages ref={message} />
             {!isReady ? <ProgressSpinner /> : ""}
             <VisGraph
                 graph={graph}
@@ -118,7 +125,10 @@ const Graphs = () => {
                 events={events}
             />
 
-            <Dialog header="Propiedades de la película" className="w-4" visible={movieSelected} onHide={() => setMovieSelected(false)}>
+            <Dialog header="Propiedades de la película" className="w-4" visible={movieSelected} onHide={() => {
+                setMovieSelected(false)
+                setFormErrors({})
+            }}>
                 <div className="p-inputgroup mb-2">
                     <span className="p-inputgroup-addon">
                         <i className="pi pi-id-card"></i>

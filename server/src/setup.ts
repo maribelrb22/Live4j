@@ -1,7 +1,7 @@
 import { movies, genres } from '../data/setupData.json'
 import { client4j } from './neo4j/client'
 
-async function setup() {
+export async function setup() {
     console.log('[4j/setup] loading initial data')
     console.log('[4j/setup] deleting all entities')
     if (!(await client4j.queries.deleteAll())) {
@@ -33,7 +33,3 @@ async function setup() {
 
     console.log('[4j/setup] data loaded successfully')
 }
-
-setup()
-    .then(() => client4j.close())
-    .then(() => process.exit())

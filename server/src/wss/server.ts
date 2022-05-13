@@ -1,4 +1,4 @@
-import WebSocketConnection, { WebSocketServer } from 'ws'
+import { WebSocketServer } from 'ws'
 import { WebsocketServerHandlers } from './handlers'
 
 export class WebsocketServer {

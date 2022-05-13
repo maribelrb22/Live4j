@@ -11,12 +11,11 @@ export class Neo4jClient {
 
     constructor(public configuration: Neo4jConfiguration) {
         this.opened = false
-        this.open()
     }
 
     private startDriver() {
         return neo4j.driver(
-            this.configuration.NEO4J_SERVER,
+            `neo4j://${this.configuration.NEO4J_SERVER}`,
             neo4j.auth.basic(
                 this.configuration.NEO4J_USERNAME,
                 this.configuration.NEO4J_PASSWORD

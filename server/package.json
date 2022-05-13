@@ -4,8 +4,8 @@
     "description": "",
     "main": "src/index.js",
     "scripts": {
-        "start": "babel-node --extensions .ts src/index.ts",
-        "setup": "babel-node --extensions .ts src/setup.ts",
+        "start": "node dist/index.js",
+        "devstart": "babel-node --extensions .ts src/index.ts",
         "build": "babel --extensions .ts src -d dist",
         "lint": "eslint src/*"
     },
@@ -16,6 +16,7 @@
         "express": "^4.17.3",
         "neo4j-driver": "^4.4.5",
         "uuid": "^8.3.2",
+        "wait-on": "^6.0.1",
         "ws": "^8.6.0"
     },
     "devDependencies": {
@@ -25,8 +26,9 @@
         "@babel/node": "^7.16.5",
         "@babel/preset-env": "^7.16.11",
         "@babel/preset-typescript": "^7.16.7",
-        "@types/node": "^17.0.31",
+        "@types/node": "^17.0.33",
         "@types/uuid": "^8.3.4",
+        "@types/wait-on": "^5.3.1",
         "@types/ws": "^8.5.3",
         "@typescript-eslint/eslint-plugin": "^5.22.0",
         "@typescript-eslint/parser": "^5.22.0",

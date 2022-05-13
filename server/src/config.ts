@@ -11,7 +11,7 @@ dotenv.config({
 })
 
 const DEFAULT_CONFIGURATION: GlobalConfiguration = {
-    NEO4J_SERVER: 'neo4j://localhost',
+    NEO4J_SERVER: 'localhost',
     NEO4J_DATABASE: 'neo4j',
     NEO4J_USERNAME: 'neo4j',
     NEO4J_PASSWORD: 'neo4j',

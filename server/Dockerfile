@@ -4,5 +4,4 @@ WORKDIR /app
 COPY . .
 RUN npm i --production=false
 RUN npm run build
-# RUN npm prune --production
-CMD docker-start.sh
+CMD npm start
